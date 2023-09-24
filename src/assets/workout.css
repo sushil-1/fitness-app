@@ -1,0 +1,218 @@
+
+.grid-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(254, 253, 253);
+  width: 100%;
+  flex-wrap: wrap; /* Wrap items to the next line on smaller screens */
+  margin: 10px;
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  width: 220px;
+  height: 30px;
+  margin: 10px;
+  background: #fbacac;
+  background: -webkit-radial-gradient(circle, #fbacac 0%, #edd2d2 100%);
+  background: radial-gradient(circle, #fbacac 0%, #edd2d2 100%);
+  border-radius: 5px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.radio-label {
+  color: red;
+  margin: 5px;
+}
+
+.radio-fitness {
+  background: red;
+  size: 10px;
+}
+
+.text-field {
+  background: #f11818;
+  background: -webkit-radial-gradient(circle, #f11818 0%, #e94646 100%);
+  background: radial-gradient(circle, #f11818 0%, #e94646 100%);
+  color: honeydew;
+  width: 60px;
+  height: 30px;
+  padding-left: 6px;
+  border: none;
+  border-radius: 3px;
+}
+
+.select {
+  background: #f11818;
+  color: honeydew;
+  width: 90px;
+  height: 30px;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.calculate-button {
+  background: red;
+  color: honeydew;
+  width: 150px;
+  height: 35px;
+  margin: 10px;
+  font-weight: bold;
+  border-radius: 3px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calculate-button:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  background: rgb(216, 2, 2);
+}
+
+/* Additional Styles */
+.details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+  border-radius: 3px;
+}
+
+.details-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 95%;
+  max-width: 1000px;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .details-row {
+    justify-content: center;
+  }
+}
+
+.details-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  justify-content: flex-end; /* Align content to the bottom */
+  position: relative; /* Position relative for absolute positioning of the select */
+  width: 230px;
+  height: 80px;
+  margin: 5px;
+  background: rgb(255, 155, 151);
+  border: 2px solid rgb(248, 130, 130);
+  border-radius: 5px;
+  transition: transform 0.2s; /* Add a smooth transition effect for scaling */
+  cursor: pointer; /* Add a pointer cursor to indicate interactivity */
+}
+
+.details-item:hover {
+  transform: scale(1.1); /* Increase the size by 10% when hovering */
+  background: rgb(249, 106, 106);
+}
+
+.additional-info {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: rgb(249, 106, 106);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: none; /* Initially hide the additional info */
+  font-size: 14px;
+  color: whitesmoke
+}
+
+.details-item:hover .additional-info {
+  display: block; /* Show the additional info when hovering */
+}
+
+.select-container {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 2px solid lightsalmon;
+  background: rgb(251, 203, 184);
+}
+
+.activities-container {
+  display: flex;
+  place-items: center;
+  flex-direction: column;
+  width: 100%;
+  border: 2px solid gold;
+}
+
+/* Original styles for larger screens */
+.activity-types {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  justify-content: space-between;
+  width: 95%;
+  border: 2px solid red;
+}
+
+/* Styles for small screens */
+@media screen and (max-width: 600px) {
+  .activity-types {
+    justify-content: center; /* Center content horizontally for small screens */
+  }
+}
+
+.activity-type {
+  width: 200px;
+  margin: 5px;
+  padding: 3px;
+  background: #efcccc;
+  border: 1px solid rgb(243, 188, 188);
+}
+.activity-type:hover {
+  cursor: pointer;
+  background: #f28f8f;
+}
+.activity-title-details {
+  width: 95%;
+  border: 2px solid rgb(9, 9, 9);
+}
+.activities-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+@media screen and (max-width: 600px) {
+  .activities-list {
+    justify-content: center; /* Center content horizontally for small screens */
+  }
+}
+.activity-type-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px; /* Add padding for spacing */
+}
+.activity {
+  width: 300px;
+  margin: 5px;
+  padding: 3px;
+  background: rgb(222, 245, 244);
+  border: 1px solid rgb(9, 133, 102);
+  border-radius: 7px;
+}
+
+/* Add more styles as needed */
