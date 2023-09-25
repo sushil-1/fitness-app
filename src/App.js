@@ -18,7 +18,7 @@ function App() {
       <CssBaseline /> {/* Apply a baseline CSS reset */}
       <Navbar />
       <Box flexGrow={1}> {/* This makes the content area flex and take up remaining space */}
-        <Routes basename="/fitness-app">
+        <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/workoutplan" element={<WorkoutPlan />} />
           <Route path="exercise/:id" element={<ExerciseDetail />} />
