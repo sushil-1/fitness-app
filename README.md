@@ -1,1 +1,1 @@
-# fitness_app uaing react js and rapid apis
+# fitness_app using react js and rapid apis
