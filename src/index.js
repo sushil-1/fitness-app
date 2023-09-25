@@ -6,7 +6,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-   <Router>
+   <Router basename="/fitness-app">
     <App />
     </Router>
   </React.StrictMode>
