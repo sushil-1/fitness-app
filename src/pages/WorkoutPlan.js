@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import '../assets/workout.css';
 import WorkoutPlanDetails from '../components/WorkoutPlanDetails';
+import Loader from '../components/Loader';
 
 export default function WorkoutPlan() {
   const [age, setAge] = useState(25);
@@ -14,6 +15,7 @@ export default function WorkoutPlan() {
   const [idealWeightData, setIdealWeightData] = useState(null); // State for ideal weight data
   const [activitiesData, setActivitiesData] = useState(null);
   const [selectedIntensityLevel, setSelectedIntensityLevel] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
 
   const headers = {
     'X-RapidAPI-Key': process.env.REACT_APP_FITNESS_CALC_API_KEY,
@@ -21,15 +23,18 @@ export default function WorkoutPlan() {
   };
 
   const fetchDailyCalorieData = async () => {
+    setIsLoading(true); // Set isLoading to true when fetching starts
     const url = `https://fitness-calculator.p.rapidapi.com/dailycalorie?age=${age}&gender=${gender}&weight=${weight}&height=${height}&activitylevel=${level}`;
 
     try {
       const response = await fetch(url, { method: 'GET', headers });
       const data = await response.json();
-
+  
       setDailyCalorieData(data);
     } catch (error) {
       console.error('Error fetching daily calorie data:', error);
+    } finally {
+      setIsLoading(false); // Reset isLoading when fetching is completed
     }
   };
 
@@ -76,6 +81,7 @@ export default function WorkoutPlan() {
 
   useEffect(() => {
     if (buttonClicked) {
+      <Loader/>
       fetchDailyCalorieData();
       // Fetch ideal weight
       fetchIdealWeightData();
@@ -209,11 +215,15 @@ const groupedActivities = activitiesData?.data && Array.isArray(activitiesData.d
     Calculate
   </button>
 </div>
-<WorkoutPlanDetails
-  idealWeightData={idealWeightData}
-  dailyCalorieData={dailyCalorieData}
-  groupedActivities={groupedActivities}
-/>
+{isLoading ? (
+  <Loader /> // Display the loader when isLoading is true
+) : (
+  <WorkoutPlanDetails
+    idealWeightData={idealWeightData}
+    dailyCalorieData={dailyCalorieData}
+    groupedActivities={groupedActivities}
+  />
+)}
 </div>
   );
 };

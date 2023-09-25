@@ -5,7 +5,7 @@ import ExerciseCard from './ExerciseCard';
 const HorizontalScroll = ({ data, bodyParts, setBodyPart, bodyPart }) => {
   const handleItemClick = (item) => {
     // Handle item click logic here
-    console.log('Item clicked:', item);
+    console.log('Item clicked  in h-scroller:', item);
   };
 
   return (

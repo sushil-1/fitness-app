@@ -7,6 +7,7 @@ import ExerciseCard from './ExerciseCard';
 import Loader from './Loader';
 
 const Exercises = ({ exercises, setExercises, bodyPart }) => {
+  console.log('Exercises below h-scroller : ', exercises);
   const [currentPage, setCurrentPage] = useState(1);
   const [exercisesPerPage] = useState(6);
   // Pagination

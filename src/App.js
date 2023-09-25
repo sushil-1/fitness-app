@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, CssBaseline } from '@mui/material';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ExerciseDetail from './pages/ExerciseDetail';
@@ -10,13 +10,20 @@ import WorkoutPlan from './pages/WorkoutPlan';
 
 function App() {
   return (
-    <Box mx="auto" maxWidth="1488px"> {/* Center content and set max width */}
+    <Box
+      display="flex"
+      flexDirection="column"
+      minHeight="100vh" // This ensures the content takes up at least the full viewport height
+    >
+      <CssBaseline /> {/* Apply a baseline CSS reset */}
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/workoutplan" element={<WorkoutPlan />} />
-        <Route path="exercise/:id" element={<ExerciseDetail />} />
-      </Routes>
+      <Box flexGrow={1}> {/* This makes the content area flex and take up remaining space */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/workoutplan" element={<WorkoutPlan />} />
+          <Route path="exercise/:id" element={<ExerciseDetail />} />
+        </Routes>
+      </Box>
       <Footer />
     </Box>
   );

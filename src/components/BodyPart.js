@@ -11,7 +11,7 @@ const BodyPart = ({ item, setBodyPart, bodyPart }) => (
     sx={bodyPart === item ? { borderTop: '2px solid #FF2625', background: '#fff', borderBottomLeftRadius: '20px', width: '230px', height: '242px', cursor: 'pointer', gap: '37px' } : { background: '#fff', borderBottomLeftRadius: '20px', width: '270px', height: '282px', cursor: 'pointer', gap: '47px' }}
     onClick={() => {
       setBodyPart(item);
-      window.scrollTo({ top: 1800, left: 100, behavior: 'smooth' });
+      window.scrollTo({ top: 1150, left: 100, behavior: 'smooth' });
     }}
   >
     <img src={Icon} alt="dumbbell" style={{ width: '40px', height: '40px' }} />

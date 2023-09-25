@@ -10,7 +10,7 @@ export default function SearchExercises({setExercises, bodyPart, setBodyPart}) {
 
   useEffect(() => {
     const fetchExercisesData = async () => {
-      console.log('insdie useeffect of search exercised..');
+      console.log('insdie useeffect of search exercises..');
       const bodyPartsData = await fetchData(
         "https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
         exerciseOptions
@@ -22,23 +22,27 @@ export default function SearchExercises({setExercises, bodyPart, setBodyPart}) {
     fetchExercisesData();
   }, []); 
 
-  const handleSearch = async (search) => {
-    console.log('inside searchhandle searching '+ {search});
-     if(search) {
-       const exercisesData = await fetchData
-       ('https://exercisedb.p.rapidapi.com/exercises', 
-       exerciseOptions);
-       const searchedExercises = exercisesData.filter(
-        (exercise) => exercise.name.toLowerCase().includes(search)
-        || exercise.target.toLowerCase().includes(search)
-        || exercise.equipment.toLowerCase().includes(search)
-        || exercise.bodyPart.toLowerCase().includes(search)
-       );
-       setSearch('');
-       console.log('searched exercises '+{searchedExercises});
-       setExercises(searchedExercises);
-     }
-  }
+  const handleSearch = async (searchKeyword) => {
+    if (searchKeyword) {
+      console.log('Search keyword:', searchKeyword);
+      const exercisesData = await fetchData(
+        `https://exercisedb.p.rapidapi.com/exercises`,
+        exerciseOptions
+      );      
+      console.log('searched all exercises', exercisesData);
+      const searchedExercises = exercisesData.filter(
+        (exercise) => 
+          exercise.name.toLowerCase().includes(searchKeyword) ||
+          exercise.target.toLowerCase().includes(searchKeyword) ||
+          exercise.equipment.toLowerCase().includes(searchKeyword) ||
+          exercise.bodyPart.toLowerCase().includes(searchKeyword)
+      );
+      setSearch(''); // Clear the input field
+      console.log('searched exercises', searchedExercises);
+      setExercises(searchedExercises);
+      window.scrollTo({ top: 1150, left: 100, behavior: 'smooth' });
+    }
+  }  
 
   return (
     <Stack alignItems={'center'} mt={'37px'} justifyContent={'center'} p='20px'
@@ -83,7 +87,7 @@ export default function SearchExercises({setExercises, bodyPart, setBodyPart}) {
       position : 'absolute',
       right : 0
      }} 
-     onClick={handleSearch}
+     onClick={() => handleSearch(search)}
      >
      Search
      </Button>
@@ -99,7 +103,6 @@ export default function SearchExercises({setExercises, bodyPart, setBodyPart}) {
       setBodyPart={setBodyPart} 
       bodyPart={bodyPart} />
     </Box>
-
     </Stack>
   )
 }
