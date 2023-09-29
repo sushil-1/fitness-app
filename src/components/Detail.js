@@ -6,7 +6,7 @@ import TargetImage from '../assets/icons/target.png';
 import EquipmentImage from '../assets/icons/equipment.png';
 
 const Detail = ({ exerciseDetail }) => {
-  const { bodyPart, gifUrl, name, target, equipment } = exerciseDetail;
+  const { bodyPart, name, gifUrl, target, equipment } = exerciseDetail;
 
   const extraDetail = [
     {
@@ -23,9 +23,14 @@ const Detail = ({ exerciseDetail }) => {
     },
   ];
 
+  // Check if exerciseDetail.gifUrl is defined, otherwise provide a default image URL
+  const exerciseImageUrl = gifUrl
+    ? require(`../exercisesdb/${gifUrl}`)
+    : ''; // You can provide a default image URL here
+
   return (
     <Stack gap="60px" sx={{ flexDirection: { lg: 'row' }, p: '20px', alignItems: 'center' }}>
-      <img src={gifUrl} alt={name} loading="lazy" className="detail-image" />
+      <img src={exerciseImageUrl} alt={name} loading="lazy" className="detail-image" />
       <Stack sx={{ gap: { lg: '35px', xs: '20px' } }}>
         <Typography sx={{ fontSize: { lg: '64px', xs: '30px' } }} fontWeight={700} textTransform="capitalize">
           {name}

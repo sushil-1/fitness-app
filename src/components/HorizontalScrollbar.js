@@ -1,30 +1,23 @@
 import React from 'react';
 import BodyPart from './BodyPart';
 import ExerciseCard from './ExerciseCard';
+import '../styles/App.css';
 
-const HorizontalScroll = ({ data, bodyParts, setBodyPart, bodyPart }) => {
-  const handleItemClick = (item) => {
-    // Handle item click logic here
-    console.log('Item clicked  in h-scroller:', item);
-  };
-
+const HorizontalScrollbar = ({ data, bodyParts, setBodyPart, bodyPart }) => {
   return (
     <div className="horizontal-scroll-container">
-        {data.map((item, index) => (
-          <div
-            key={item.id || index}
-            className="scroll-item"
-            onClick={() => handleItemClick(item)}
-          >
-            {bodyParts ? (
-              <BodyPart item={item} setBodyPart={setBodyPart} bodyPart={bodyPart} />
-            ) : (
-              <ExerciseCard exercise={item} />
-            )}
-          </div>
-        ))}
-      </div>
+      {data.map((item) => (
+        <div
+          key={item.id || item}
+          itemID={item.id || item}
+          title={item.id || item}
+          className="scroll-item"
+        >
+          {bodyParts ? <BodyPart item={item} setBodyPart={setBodyPart} bodyPart={bodyPart} /> : <ExerciseCard exercise={item} />}
+        </div>
+      ))}
+    </div>
   );
-};
+}
 
-export default HorizontalScroll;
+export default HorizontalScrollbar;

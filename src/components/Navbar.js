@@ -16,10 +16,11 @@ export default function Navbar() {
       direction='row'
       justifyContent='space-around'
       sx={{
-        gap: { sm: '60px', xs: '20px' },
-        mt: { sm: '15px', xs: '10px' },
-        justifyContent: 'none',
-      }}
+          gap: { sm: '60px', xs: '20px' },
+          mt: { sm: '15px', xs: '10px' },
+          justifyContent: 'none',
+          borderBottom: '1px solid #ccc', // Add this line for the bottom border
+        }}
       px={'20px'}
     >
       <Link to='/'>

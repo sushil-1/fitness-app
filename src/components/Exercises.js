@@ -2,51 +2,49 @@ import React, { useEffect, useState } from 'react';
 import Pagination from '@mui/material/Pagination';
 import { Box, Stack, Typography } from '@mui/material';
 
-import { exerciseOptions, fetchData } from '../utils/fetchData';
 import ExerciseCard from './ExerciseCard';
 import Loader from './Loader';
 
+import exercises1 from '../exercisesdb/exercises.json';
+import bodyPart1 from '../exercisesdb/bodyPart.json';
+
 const Exercises = ({ exercises, setExercises, bodyPart }) => {
-  console.log('Exercises below h-scroller : ', exercises);
   const [currentPage, setCurrentPage] = useState(1);
   const [exercisesPerPage] = useState(6);
-  // Pagination
-  const indexOfLastExercise = currentPage * exercisesPerPage;
-  const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
-
-  // Check if exercises is an array before slicing
-  const currentExercises = Array.isArray(exercises) ? exercises.slice(indexOfFirstExercise, indexOfLastExercise) : [];
-
-  const paginate = (event, value) => {
-    setCurrentPage(value);
-    // You can scroll here if needed
-  };
 
   useEffect(() => {
-    // Move the fetch logic here to load exercises based on bodyPart
-    const fetchExercisesData = async () => {
-      try {
-        let exercisesData = [];
+    let exercisesData = [];
 
-        if (bodyPart === 'all') {
-          exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
-        } else {
-          exercisesData = await fetchData(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`, exerciseOptions);
-        }
-
-        setExercises(exercisesData);
-      } catch (error) {
-        console.error('Error fetching exercises:', error);
+    if (bodyPart === 'all') {
+      exercisesData = exercises1;
+    } else {
+      // Assuming bodyPart1 is an object with body parts as keys
+      if (bodyPart1.hasOwnProperty(bodyPart)) {
+        exercisesData = bodyPart1[bodyPart];
       }
-    };
+    }
 
-    fetchExercisesData();
-  }, [bodyPart, setExercises]);
+    setExercises(exercisesData);
+  }, [bodyPart]);
+
+// Pagination
+let currentExercises = [];
+if (exercises) {
+  const indexOfLastExercise = currentPage * exercisesPerPage;
+  const indexOfFirstExercise = indexOfLastExercise - exercisesPerPage;
+  currentExercises = exercises.slice(indexOfFirstExercise, indexOfLastExercise);
+}
+
+const paginate = (event, value) => {
+  setCurrentPage(value);
+
+  window.scrollTo({ top: 1800, behavior: 'smooth' });
+};
 
   if (!currentExercises.length) return <Loader />;
 
   return (
-    <Box id="exercises" sx={{ mt: { lg: '109px', xs: '50px' }, mb: '46px' }} p="20px">
+    <Box id="exercises" sx={{ mt: { lg: '109px' } }} mt="50px" p="20px">
       <Typography variant="h4" fontWeight="bold" sx={{ fontSize: { lg: '44px', xs: '30px' } }} mb="46px">Showing Results</Typography>
       <Stack direction="row" sx={{ gap: { lg: '107px', xs: '50px' } }} flexWrap="wrap" justifyContent="center">
         {currentExercises.map((exercise, idx) => (

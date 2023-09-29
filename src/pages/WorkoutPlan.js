@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import '../assets/workout.css';
+import '../styles/workout.css';
 import WorkoutPlanDetails from '../components/WorkoutPlanDetails';
 import Loader from '../components/Loader';
 
