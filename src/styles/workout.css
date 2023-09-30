@@ -12,7 +12,7 @@
 
 .grid-item {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   width: 220px;
   height: 30px;
   margin: 10px;
@@ -27,6 +27,11 @@
   font-family: sans-serif;
   font-size: 14px;
   font-weight: bold;
+}
+
+.label {
+  display: flex;
+  align-items: center; /* Center vertically */
 }
 
 .radio-label {
@@ -56,7 +61,6 @@
   color: honeydew;
   width: 90px;
   height: 30px;
-  padding: 3px;
   border-radius: 3px;
 }
 

@@ -120,7 +120,7 @@ const groupedActivities = activitiesData?.data && Array.isArray(activitiesData.d
 <div className="grid-container">
 <div className="grid-row">
   <div className="grid-item">
-    <label className="label">Age: </label>
+    <label className="label">Age </label>
     <input
       className="text-field"
       placeholder="Age(year)"
@@ -130,7 +130,7 @@ const groupedActivities = activitiesData?.data && Array.isArray(activitiesData.d
     />
   </div>
   <div className="grid-item">
-    <label className="label">Gender: </label>
+    <label className="label">Gender </label>
       <label className="radio-label">
         <input
           className='radio-fitness'
@@ -153,7 +153,7 @@ const groupedActivities = activitiesData?.data && Array.isArray(activitiesData.d
 </div>
 <div className="grid-row">
   <div className="grid-item">
-    <label className="label">Weight: </label>
+    <label className="label">Weight </label>
     <input
       className="text-field"
       placeholder="Weight(kg)"
@@ -163,7 +163,7 @@ const groupedActivities = activitiesData?.data && Array.isArray(activitiesData.d
     />
   </div>
   <div className="grid-item">
-    <label className="label">Height: </label>
+    <label className="label">Height </label>
     <input
       className="text-field"
       placeholder="Height(cm)"
@@ -175,7 +175,7 @@ const groupedActivities = activitiesData?.data && Array.isArray(activitiesData.d
 </div>
 <div className="grid-row">
   <div className="grid-item">
-    <label className="label">Exercise: </label>
+    <label className="label">Exercise </label>
     <select
       className="select"
       value={level}
@@ -192,7 +192,7 @@ const groupedActivities = activitiesData?.data && Array.isArray(activitiesData.d
 </div>
 <div className="grid-row">
   <div className="grid-item">
-    <label className="label">Exercise Intensity: </label>
+    <label className="label">Exercise Intensity </label>
     <select
       className="select"
       value={selectedIntensityLevel}
