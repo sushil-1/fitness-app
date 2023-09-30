@@ -1,9 +1,10 @@
+import Modal from 'react-modal';
 import React, { useState } from 'react';
 
 // Helper function to render selected goal data
 const renderSelectedGoalData = (selectedGoalData) => {
   if (selectedGoalData == null) {
-    return null; // Don't display anything if selectedGoalData is null
+    return null; // Don't display anything if selectedGoalData 
   }
 
   if (typeof selectedGoalData === 'object') {
@@ -12,7 +13,9 @@ const renderSelectedGoalData = (selectedGoalData) => {
       <div>
         {Object.entries(selectedGoalData).map(([key, value]) => (
           <div key={key}>
-            <strong style={{ fontSize: '15px' }}>{key === 'calory' ? 'daily calories ' : key+' (kg) '} </strong>
+            <strong style={{ fontSize: '15px' }}>
+             {key === 'calory' ? 'daily calories ' : key+' (kg) '}
+            </strong>
             <strong style={{ fontSize: '24px' }}>
              {typeof value === 'number' ? value : value.replace(/[^\d.-]/g, '')}
             </strong>
@@ -23,7 +26,7 @@ const renderSelectedGoalData = (selectedGoalData) => {
   } else {
     // If selectedGoalData is a single value
     return (
-      <div>
+      <div style={{marginBottom: '5px'}}>
           <strong style={{ fontSize: '28px', marginLeft: '15px' }}>{selectedGoalData}</strong>
           <br/>
           <strong style={{ fontSize: '15px' }}>daily calories </strong>
@@ -37,6 +40,8 @@ const WorkoutPlanDetails = ({ idealWeightData, dailyCalorieData, groupedActiviti
   const [selectedGoal, setSelectedGoal] = useState('');
   const [selectedGoalData, setSelectedGoalData] = useState(null);
   const [selectedActivityType, setSelectedActivityType] = useState('');
+  const [isIdealWeightModalOpen, setIsIdealWeightModalOpen] = useState(false); // State for the ideal weight modal
+  const [isBMRModalOpen, setIsBMRModalOpen] = useState(false); // State for the BMR modal
 
   const handleGoalSelect = (e) => {
     const goal = e.target.value;
@@ -54,41 +59,96 @@ const WorkoutPlanDetails = ({ idealWeightData, dailyCalorieData, groupedActiviti
     setSelectedActivityType((prevType) => (category === prevType ? '' : category));
   };
 
+  const openIdealWeightModal = () => {
+    setIsIdealWeightModalOpen(true);
+  };
+
+  const openBMRModal = () => {
+    setIsBMRModalOpen(true);
+  };
+
   return (
     <div className="details-container">
 
       <div className="details-row">
         {/* ideal weight in kg */}
-        {idealWeightData?.data && (
+                {idealWeightData?.data && (
           <div className="details-item">
-            <div style={{ fontSize: '36px', fontWeight: 'bold', margin: 'auto' }}>
+            <div onClick={openIdealWeightModal} style={{ fontSize: '36px', fontWeight: 'bold', margin: 'auto' }}>
               {(
                 Object.values(idealWeightData.data).reduce((total, weight) => total + weight, 0) /
                 Object.values(idealWeightData.data).length
               ).toFixed(2)}
             </div>
-            <div style={{ fontSize: '16px', fontWeight: 'bold', marginTop: 'auto' }}>
+            <div onClick={openIdealWeightModal} style={{ fontSize: '16px', fontWeight: 'bold', marginTop: 'auto' }}>
                Ideal Weight (kg)
             </div>
-            <div className="additional-info">
-             the weight at which an individual is considered to be at their healthiest and most optimal for their body composition and overall well-being. It's important to note that there is no one-size-fits-all ideal weight, as it varies from person to person based on factors such as age, gender, height, muscle mass, and body fat percentage.
-            </div>
-            </div>
-        )}        
+            <Modal
+              isOpen={isIdealWeightModalOpen}
+              onRequestClose={() => setIsIdealWeightModalOpen(false)}
+              contentLabel="Ideal Weight Modal"
+              ariaHideApp={false}
+              style={{
+                overlay: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                },
+                content: {
+                  width: '80%',
+                  maxWidth: '500px',
+                  margin: '0 auto',
+                  padding: '20px',
+                  borderRadius: '8px',
+                  backgroundColor: '#fff',
+                  boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
+                },
+              }}
+            >
+              <div>
+                the weight at which an individual is considered to be at their healthiest and most optimal for their body composition and overall well-being. It's important to note that there is no one-size-fits-all ideal weight, as it varies from person to person based on factors such as age, gender, height, muscle mass, and body fat percentage.
+              </div>
+            </Modal>
+          </div>
+        )}
+        
         {/* BMR data */}      
         {dailyCalorieData?.data && (
-          <div className="details-item">
-            <div style={{ fontSize: '36px', fontWeight: 'bold', margin: 'auto' }}>{dailyCalorieData.data.BMR}</div>
-            <div style={{ fontSize: '16px', fontWeight: 'bold', marginTop: 'auto' }}>BMR</div>
-            <div className="additional-info">
-              Basal Metabolic Rate (BMR) is the number of calories your body burns at rest to maintain basic functions such as breathing, circulation, and cell production.
+          <div className="details-item" >
+            <div onClick={openBMRModal} style={{ fontSize: '36px', fontWeight: 'bold', margin: 'auto' }}>{dailyCalorieData.data.BMR}
             </div>
+            <div onClick={openBMRModal} style={{ fontSize: '16px', fontWeight: 'bold', marginTop: 'auto' }}>
+              BMR
+            </div>
+            <Modal
+              isOpen={isBMRModalOpen}
+              onRequestClose={() => setIsBMRModalOpen(false)}
+              contentLabel="BMR Modal"
+              ariaHideApp={false}
+              style={{
+                overlay: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                },
+                content: {
+                  width: '80%',
+                  maxWidth: '500px',
+                  margin: '0 auto',
+                  padding: '20px',
+                  borderRadius: '8px',
+                  backgroundColor: '#fff',
+                  boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
+                },
+              }}
+            >
+              {/* Modal content */}
+              <div>
+                Basal Metabolic Rate (BMR) is the number of calories your body burns at rest to maintain basic functions such as breathing, circulation, and cell production.
+              </div>
+            </Modal>
           </div>
-        )}        
+        )}
         {/* Daily calories needed */}
         {dailyCalorieData && (
           <div className="details-item">
-            <div style={{marginBottom: '15px'}}>
+            <div style={{marginBottom: '8px'}}>
               {renderSelectedGoalData(selectedGoalData)}
             </div>
             <select

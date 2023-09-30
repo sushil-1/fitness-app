@@ -5,10 +5,10 @@ import WorkoutPlanDetails from '../components/WorkoutPlanDetails';
 import Loader from '../components/Loader';
 
 export default function WorkoutPlan() {
-  const [age, setAge] = useState(25);
+  const [age, setAge] = useState('');
   const [gender, setGender] = useState('male');
-  const [weight, setWeight] = useState(70);
-  const [height, setHeight] = useState(180);
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
   const [level, setLevel] = useState('level_1');
   const [buttonClicked, setButtonClicked] = useState(false);
   const [dailyCalorieData, setDailyCalorieData] = useState(null);
@@ -41,13 +41,7 @@ export default function WorkoutPlan() {
   // Function to fetch ideal weight data
   const fetchIdealWeightData = async () => {
     const url = `https://fitness-calculator.p.rapidapi.com/idealweight?gender=${gender}&height=${height}`;
-    const options = {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': 'd68285c5f3msh07d8fb6efa56460p1f012ajsn4a9bf6385f0e',
-        'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com',
-      },
-    };
+    const options = {method: 'GET', headers};
 
     try {
       const response = await fetch(url, options);
@@ -61,13 +55,7 @@ export default function WorkoutPlan() {
  // Function to fetch activity data
  const fetchActivitiesData = async () => {
     const url = `https://fitness-calculator.p.rapidapi.com/activities?intensitylevel=${selectedIntensityLevel}`;
-    const options = {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': 'd68285c5f3msh07d8fb6efa56460p1f012ajsn4a9bf6385f0e',
-        'X-RapidAPI-Host': 'fitness-calculator.p.rapidapi.com',
-      },
-    };
+    const options = {method: 'GET', headers};
   
     try {
       const response = await fetch(url, options);
@@ -120,10 +108,10 @@ const groupedActivities = activitiesData?.data && Array.isArray(activitiesData.d
 <div className="grid-container">
 <div className="grid-row">
   <div className="grid-item">
-    <label className="label">Age </label>
+    <label className="label">Age (year)</label>
     <input
       className="text-field"
-      placeholder="Age(year)"
+      placeholder="(year)"
       type="number"
       value={age}
       onChange={(e) => setAge(e.target.value)}
@@ -147,26 +135,26 @@ const groupedActivities = activitiesData?.data && Array.isArray(activitiesData.d
           checked={gender === 'female'}
           onChange={() => setGender('female')}
         />
-        F
+         F 
       </label>
   </div>
 </div>
 <div className="grid-row">
   <div className="grid-item">
-    <label className="label">Weight </label>
+    <label className="label">Weight (kg)</label>
     <input
       className="text-field"
-      placeholder="Weight(kg)"
+      placeholder="(kg)"
       type="number"
       value={weight}
       onChange={(e) => setWeight(e.target.value)}
     />
   </div>
   <div className="grid-item">
-    <label className="label">Height </label>
+    <label className="label">Height (cm)</label>
     <input
       className="text-field"
-      placeholder="Height(cm)"
+      placeholder="(cm)"
       type="number"
       value={height}
       onChange={(e) => setHeight(e.target.value)}
@@ -175,7 +163,7 @@ const groupedActivities = activitiesData?.data && Array.isArray(activitiesData.d
 </div>
 <div className="grid-row">
   <div className="grid-item">
-    <label className="label">Exercise </label>
+    <label className="label">Exercise Level</label>
     <select
       className="select"
       value={level}
@@ -192,7 +180,7 @@ const groupedActivities = activitiesData?.data && Array.isArray(activitiesData.d
 </div>
 <div className="grid-row">
   <div className="grid-item">
-    <label className="label">Exercise Intensity </label>
+    <label className="label">Exercise Intensity</label>
     <select
       className="select"
       value={selectedIntensityLevel}

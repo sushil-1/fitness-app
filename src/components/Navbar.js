@@ -17,20 +17,17 @@ export default function Navbar() {
       justifyContent='space-around'
       sx={{
           gap: { sm: '60px', xs: '20px' },
-          mt: { sm: '15px', xs: '10px' },
+          mt: { sm: '13px', xs: '10px' },
           justifyContent: 'none',
           borderBottom: '1px solid #ccc', // Add this line for the bottom border
         }}
       px={'20px'}
     >
-      <Link to='/'>
         <img
           src={logo}
           alt='logo'
           style={{ width: '48px', height: '48px', margin: '0 10px' }}
         />
-      </Link>
-
       <Stack
         direction='row'
         alignItems='flex-end'

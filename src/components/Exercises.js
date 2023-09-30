@@ -11,7 +11,18 @@ import bodyPart1 from '../exercisesdb/bodyPart.json';
 const Exercises = ({ exercises, setExercises, bodyPart }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [exercisesPerPage] = useState(6);
+  let scrollTarget;
 
+  // Detect the screen width (viewport width)
+  const screenWidth = window.innerWidth;
+
+  if (screenWidth >= 600) {
+    // For screens with a width of 600px or more
+    scrollTarget = 1800;
+  } else {
+    // For screens with a width less than 600px
+    scrollTarget = 1180;
+  }
   useEffect(() => {
     let exercisesData = [];
 
@@ -25,7 +36,7 @@ const Exercises = ({ exercises, setExercises, bodyPart }) => {
     }
 
     setExercises(exercisesData);
-  }, [bodyPart]);
+  }, [bodyPart, setExercises]);
 
 // Pagination
 let currentExercises = [];
@@ -38,7 +49,7 @@ if (exercises) {
 const paginate = (event, value) => {
   setCurrentPage(value);
 
-  window.scrollTo({ top: 1120, behavior: 'smooth' });
+  window.scrollTo({ top: scrollTarget, behavior: 'smooth' });
 };
 
   if (!currentExercises.length) return <Loader />;
